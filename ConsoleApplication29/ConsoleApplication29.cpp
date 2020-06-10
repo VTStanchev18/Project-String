@@ -59,8 +59,8 @@ void editMode() {
 
 void showInitialGreeting()
 {
-    cout << "\n                                     Interoperable Console                       \n";
-    cout << "  Welcome to our game.\n";
+    cout << "\n                                     Interoperable Console- Wordie                      \n";
+    cout << "  Welcome to our game called Wordie.\n";
     cout << "  Thank you for choosing our software!\n";
     cout << "  Please refer to the Documentation for a more detailed explanation about using the program.\n";
     cout << "  Our Team takes no responsibility for misuse of the program.\n\n";
@@ -68,7 +68,7 @@ void showInitialGreeting()
 
 void showGoodbyeMessage()
 {
-    cout << "\n  Thank you for using our game!\n\n";
+    cout << "\n  Thank you for using our game Wordie!\n\n";
     cout << "  Copyright (c) 2020 team\n";;
 }
 
