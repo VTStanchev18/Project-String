@@ -3,18 +3,11 @@
 #include <fstream>
 #include <ctime>
 #include <vector>
+#include <algorithm>
+#include <random>
 
 using namespace std;
-// function for a random number
-int giveRandomNum() {
-    int num = rand() % 4;
-    return num;
-}
-// function for numbers connected with vectors
-int giveRandomNum(vector<string> vect) {
-    int num = rand() % vect.size();
-    return num;
-}
+
 // function for checking whether is correct
 bool isCorrect() {
 
@@ -22,6 +15,8 @@ bool isCorrect() {
 }
 // function for the easy words of our program
 void easyOption(vector<string> vect, vector<string> definitions) {
+    auto rng = default_random_engine(time(0));
+    int j;
     vect = { "signal","apple","dog","cat","computer" };
 
     definitions = {
@@ -31,17 +26,16 @@ void easyOption(vector<string> vect, vector<string> definitions) {
     "an animal that catches mice; hates dogs",
     "a device used for storing and processing data"};
 
-    int index;
+    shuffle(vect.begin(), vect.end(), rng);
 
     for (int i = 0; i < 4; i++) {
-        index = giveRandomNum(vect);
-        cout << endl << vect[index] << endl;
-        cout << "1. " << definitions[giveRandomNum()] << endl;
-        cout << "2. " << definitions[giveRandomNum()] << endl;
-        cout << "3. " << definitions[giveRandomNum()] << endl;
-        cout << "4. " << definitions[giveRandomNum()] << endl;
-        cout << "5. Nothing from above" << endl;
+        random_shuffle(definitions.begin(), definitions.end());
 
+        cout << endl;
+        for (j = 0; j < 4; j++) {
+            cout << j + 1 << ". " << definitions[j] << endl;
+        }
+        cout << j + 1 << ". " << "None of the above\n";
     }
 }
 
@@ -92,7 +86,7 @@ bool doShowMenu()
     case 1:easyOption(words,definitions);
 
         break;
-    case 2:mediumOption();
+    //case 2:mediumOption();
         break;
     case 3:advancedOption();
         break;
