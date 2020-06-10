@@ -7,14 +7,42 @@
 using namespace std;
 
 int giveRandomNum() {
-    int num = rand() % 5;
+    int num = rand() % 4;
     return num;
 }
 
-void easyOption(vector<string>& vect) {
-    vect = { "signal","apple","dog","cat","computer" };
-    cout << vect[giveRandomNum()];
+int giveRandomNum(vector<string> vect) {
+    int num = rand() % vect.size();
+    return num;
+}
 
+bool isCorrect() {
+
+    return true;
+}
+
+void easyOption(vector<string> vect, vector<string> definitions) {
+    vect = { "signal","apple","dog","cat","computer" };
+
+    definitions = {
+    "convey information or instructions by means of a gesture, action, or sound.",
+    "a round fruit; typically has green or red color",
+    "an animal that barks; humans' best friend",
+    "an animal that catches mice; hates dogs",
+    "a device used for storing and processing data"};
+
+    int index;
+
+    for (int i = 0; i < 4; i++) {
+        index = giveRandomNum(vect);
+        cout << endl << vect[index] << endl;
+        cout << "1. " << definitions[giveRandomNum()] << endl;
+        cout << "2. " << definitions[giveRandomNum()] << endl;
+        cout << "3. " << definitions[giveRandomNum()] << endl;
+        cout << "4. " << definitions[giveRandomNum()] << endl;
+        cout << "5. Nothing from above" << endl;
+
+    }
 }
 
 void mediumOption() {
@@ -46,7 +74,8 @@ void showGoodbyeMessage()
 
 bool doShowMenu()
 {
-    vector<string> vect;
+    vector<string> words;
+    vector<string> definitions;
     int userInput;
 
     cout << "\n------- Main Menu -------\n";
@@ -60,7 +89,7 @@ bool doShowMenu()
 
     switch (userInput)
     {
-    case 1:easyOption(vect);
+    case 1:easyOption(words,definitions);
 
         break;
     case 2:mediumOption();
@@ -75,7 +104,7 @@ bool doShowMenu()
         }
         break;
    
-    default: cout << "\nPlease enter a valid option!\n"; break;
+    default: cout << "\nPlease enter a valid number!\n"; break;
     }
     return true;
 }
