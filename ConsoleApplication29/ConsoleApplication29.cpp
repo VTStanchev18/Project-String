@@ -5,22 +5,22 @@
 #include <vector>
 
 using namespace std;
-
+// function for a random number
 int giveRandomNum() {
     int num = rand() % 4;
     return num;
 }
-
+// function for numbers connected with vectors
 int giveRandomNum(vector<string> vect) {
     int num = rand() % vect.size();
     return num;
 }
-
+// function for checking whether is correct
 bool isCorrect() {
 
     return true;
 }
-
+// function for the easy words of our program
 void easyOption(vector<string> vect, vector<string> definitions) {
     vect = { "signal","apple","dog","cat","computer" };
 
@@ -45,7 +45,7 @@ void easyOption(vector<string> vect, vector<string> definitions) {
     }
 }
 
-void mediumOption() {
+void mediumOption(vector<string> vect, vector<string> definitions) {
 
 }
 
@@ -56,7 +56,7 @@ void advancedOption() {
 void editMode() {
 
 }
-
+// function for displaying greetings
 void showInitialGreeting()
 {
     cout << "\n                                     Interoperable Console- Wordie                      \n";
@@ -65,13 +65,13 @@ void showInitialGreeting()
     cout << "  Please refer to the Documentation for a more detailed explanation about using the program.\n";
     cout << "  Our Team takes no responsibility for misuse of the program.\n\n";
 }
-
+// function for displaying goodbye message
 void showGoodbyeMessage()
 {
     cout << "\n  Thank you for using our game Wordie!\n\n";
     cout << "  Copyright (c) 2020 team\n";;
 }
-
+// function for our menu from which the player can chose difficulty, see his score or exit the program 
 bool doShowMenu()
 {
     vector<string> words;
@@ -113,5 +113,5 @@ int main()
 {
     srand(time(NULL));
     showInitialGreeting();
-    while (doShowMenu());
+    while (doShowMenu()); // loop for the menu
 }
