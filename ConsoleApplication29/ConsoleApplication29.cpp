@@ -13,17 +13,26 @@ struct QA_PAIR {
     string question, answer;
 };
 
-// function for checking whether is correct
+// function for checking whether user's answer is correct
 bool isCorrect(vector <string> answerPool, QA_PAIR currentQuestion, int answer) {
-
+    if (find(answerPool.begin(),answerPool.end(),currentQuestion.question) == answerPool.end()) {
+        if (answer == answerPool.size() + 1) {
+            return true;
+        }
+    }
+    if (answerPool[answer - 1] == currentQuestion.answer) {
+        return true;
+    }
+    return false;
 }
+
 // function for the easy words of our program
 void easyOption()
 {
     vector <string> words;
     vector <QA_PAIR> questionAnswerPairs;
     vector <string> answerPool;
-
+    int userAnswer;
     auto rng = default_random_engine(time(0));
     int j;
     words = { "signal","apple","dog","cat","computer" };
@@ -52,6 +61,16 @@ void easyOption()
             cout << j + 1 << ". " << answerPool[j] << endl;
         }
         cout << j + 1 << ". " << "None of the above\n";
+
+        cout << "\n Enter your answer: ";
+        cin >> userAnswer;
+        if (isCorrect(answerPool, questionAnswerPairs[i],userAnswer)) {
+            cout << "\n Great!!!\n\n";
+        }
+        else
+        {
+            cout << "\n Dumbass!!!\n\n";
+        }
     }
 }
 
@@ -69,8 +88,8 @@ void editMode() {
 // function for displaying greetings
 void showInitialGreeting()
 {
-    cout << "\n                                     Interoperable Console- Wordie                      \n";
-    cout << "  Welcome to our game called Wordie.\n";
+    cout << "\n                                     Interoperable Console- Wordy                      \n";
+    cout << "  Welcome to our game called Wordy.\n";
     cout << "  Thank you for choosing our software!\n";
     cout << "  Please refer to the Documentation for a more detailed explanation about using the program.\n";
     cout << "  Our Team takes no responsibility for misuse of the program.\n\n";
@@ -78,7 +97,7 @@ void showInitialGreeting()
 // function for displaying goodbye message
 void showGoodbyeMessage()
 {
-    cout << "\n  Thank you for using our game Wordie!\n\n";
+    cout << "\n  Thank you for using our game Wordy!\n\n";
     cout << "  Copyright (c) 2020 team\n";;
 }
 // function for our menu from which the player can chose difficulty, see his score or exit the program 
