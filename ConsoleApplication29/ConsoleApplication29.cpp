@@ -29,7 +29,7 @@ void easyOption(vector<string> vect, vector<string> definitions) {
     shuffle(vect.begin(), vect.end(), rng);
 
     for (int i = 0; i < 4; i++) {
-        random_shuffle(definitions.begin(), definitions.end());
+        shuffle(definitions.begin(), definitions.end(), rng);
 
         cout << endl;
         for (j = 0; j < 4; j++) {
