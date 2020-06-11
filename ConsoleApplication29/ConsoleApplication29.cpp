@@ -14,9 +14,8 @@ struct QA_PAIR {
 };
 
 // function for checking whether is correct
-bool isCorrect() {
+bool isCorrect(vector <string> answerPool, QA_PAIR currentQuestion, int answer) {
 
-    return true;
 }
 // function for the easy words of our program
 void easyOption()
