@@ -26,6 +26,29 @@ bool isCorrect(vector <string> answerPool, QA_PAIR currentQuestion, int answer) 
     return false;
 }
 
+void readWordsFromFile(vector <string> &words, vector <QA_PAIR> &questionAnswerPairs) {
+    ifstream file;
+    file.open("words.txt");
+    string temp;
+    QA_PAIR temp2;
+    while (file.good()) {
+        getline(file,temp);
+        /*if (!file.good()) {
+            break;
+        }*/
+        words.push_back(temp);
+        temp2.question = temp;
+        
+        getline(file, temp);
+        /*if (!file.good()) {
+            break;
+        }*/
+        temp2.answer = temp;
+        questionAnswerPairs.push_back(temp2);
+    }
+    file.close();
+}
+
 // function for the easy words of our program
 void easyOption()
 {
@@ -35,16 +58,8 @@ void easyOption()
     int userAnswer;
     auto rng = default_random_engine(time(0));
     int j;
-    words = { "signal","apple","dog","cat","computer" };
 
-    questionAnswerPairs = {
-        {"signal", "convey information or instructions by means of a gesture, action, or sound."},
-        {"apple", "a round fruit; typically has green or red color"},
-        {"dog", "an animal that barks; humans' best friend"},
-        {"cat", "an animal that catches mice; hates dogs"},
-        {"computer", "a device used for storing and processing data"}
-    };
-
+    readWordsFromFile(words, questionAnswerPairs);
     shuffle(questionAnswerPairs.begin(), questionAnswerPairs.end(), rng);
     for (int i = 0; i < 4; i++) {
         shuffle(words.begin(), words.end(), rng);
