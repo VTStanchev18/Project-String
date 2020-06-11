@@ -13,6 +13,22 @@ struct QA_PAIR {
     string question, answer;
 };
 
+void parseUserInput(int& out)
+{
+    string in;
+
+    getline(cin, in);
+
+    for (int i = 0; i < in.size(); i++) {
+        if (in[i] < '0' or in[i]>'9') {
+            out = -1;
+            return;
+        }
+    }
+
+    out = stoi(in);
+}
+
 // function for checking whether user's answer is correct
 bool isCorrect(vector <string> answerPool, QA_PAIR currentQuestion, int answer) {
     if (find(answerPool.begin(),answerPool.end(),currentQuestion.question) == answerPool.end()) {
@@ -20,7 +36,7 @@ bool isCorrect(vector <string> answerPool, QA_PAIR currentQuestion, int answer) 
             return true;
         }
     }
-    if (answerPool[answer - 1] == currentQuestion.answer) {
+    if (answerPool[answer-1] == currentQuestion.question) {
         return true;
     }
     return false;
@@ -33,16 +49,11 @@ void readWordsFromFile(vector <string> &words, vector <QA_PAIR> &questionAnswerP
     QA_PAIR temp2;
     while (file.good()) {
         getline(file,temp);
-        /*if (!file.good()) {
-            break;
-        }*/
+
         words.push_back(temp);
         temp2.question = temp;
         
         getline(file, temp);
-        /*if (!file.good()) {
-            break;
-        }*/
         temp2.answer = temp;
         questionAnswerPairs.push_back(temp2);
     }
@@ -58,12 +69,12 @@ void easyOption()
     int userAnswer;
     auto rng = default_random_engine(time(0));
     int j;
-
+    int correctAnswers = 0;
     readWordsFromFile(words, questionAnswerPairs);
     shuffle(questionAnswerPairs.begin(), questionAnswerPairs.end(), rng);
     for (int i = 0; i < 4; i++) {
         shuffle(words.begin(), words.end(), rng);
-
+        
         answerPool.clear();
 
         for (int j = 0; j < 4; j++) {
@@ -78,15 +89,22 @@ void easyOption()
         cout << j + 1 << ". " << "None of the above\n";
 
         cout << "\n Enter your answer: ";
-        cin >> userAnswer;
+        parseUserInput(userAnswer);
+        if (userAnswer<1 or userAnswer>j + 1) {
+            i--;
+            cout << "\nPlease enter a valid number!!!\n";
+            continue;
+        }
         if (isCorrect(answerPool, questionAnswerPairs[i],userAnswer)) {
             cout << "\n Great!!!\n\n";
+            correctAnswers++;
         }
         else
         {
             cout << "\n Dumbass!!!\n\n";
         }
     }
+    cout << "\n You guessed " << correctAnswers << " out of " << 4 << endl;
 }
 
 void mediumOption(vector<string> vect, vector<string> definitions) {
@@ -129,7 +147,7 @@ bool doShowMenu()
     cout << "4. Edit" << endl;
     cout << "5. Quit" << endl;
     cout << "Enter option from the menu by typing a number: ";
-    cin >> userInput;
+    parseUserInput(userInput);
 
     switch (userInput)
     {
