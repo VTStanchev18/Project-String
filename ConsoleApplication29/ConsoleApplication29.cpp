@@ -44,7 +44,7 @@ bool isCorrect(vector <string> answerPool, QA_PAIR currentQuestion, int answer) 
 
 void readWordsFromFile(vector <string> &words, vector <QA_PAIR> &questionAnswerPairs) {
     ifstream file;
-    file.open("words.txt");
+    file.open("easy.txt");
     string temp;
     QA_PAIR temp2;
     while (file.good()) {
