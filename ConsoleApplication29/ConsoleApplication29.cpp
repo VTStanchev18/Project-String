@@ -8,32 +8,49 @@
 
 using namespace std;
 
+//question-answer pair
+struct QA_PAIR {
+    string question, answer;
+};
+
 // function for checking whether is correct
 bool isCorrect() {
 
     return true;
 }
 // function for the easy words of our program
-void easyOption(vector<string> vect, vector<string> definitions) {
+void easyOption()
+{
+    vector <string> words;
+    vector <QA_PAIR> questionAnswerPairs;
+    vector <string> answerPool;
+
     auto rng = default_random_engine(time(0));
     int j;
-    vect = { "signal","apple","dog","cat","computer" };
+    words = { "signal","apple","dog","cat","computer" };
 
-    definitions = {
-    "convey information or instructions by means of a gesture, action, or sound.",
-    "a round fruit; typically has green or red color",
-    "an animal that barks; humans' best friend",
-    "an animal that catches mice; hates dogs",
-    "a device used for storing and processing data"};
+    questionAnswerPairs = {
+        {"signal", "convey information or instructions by means of a gesture, action, or sound."},
+        {"apple", "a round fruit; typically has green or red color"},
+        {"dog", "an animal that barks; humans' best friend"},
+        {"cat", "an animal that catches mice; hates dogs"},
+        {"computer", "a device used for storing and processing data"}
+    };
 
-    shuffle(vect.begin(), vect.end(), rng);
-
+    shuffle(questionAnswerPairs.begin(), questionAnswerPairs.end(), rng);
     for (int i = 0; i < 4; i++) {
-        shuffle(definitions.begin(), definitions.end(), rng);
+        shuffle(words.begin(), words.end(), rng);
 
-        cout << endl;
+        answerPool.clear();
+
+        for (int j = 0; j < 4; j++) {
+            answerPool.push_back(words[j]);
+        }
+        shuffle(answerPool.begin(), answerPool.end(), rng);
+
+        cout << endl << questionAnswerPairs[i].answer << endl;
         for (j = 0; j < 4; j++) {
-            cout << j + 1 << ". " << definitions[j] << endl;
+            cout << j + 1 << ". " << answerPool[j] << endl;
         }
         cout << j + 1 << ". " << "None of the above\n";
     }
@@ -83,7 +100,7 @@ bool doShowMenu()
 
     switch (userInput)
     {
-    case 1:easyOption(words,definitions);
+    case 1:easyOption();
 
         break;
     //case 2:mediumOption();
