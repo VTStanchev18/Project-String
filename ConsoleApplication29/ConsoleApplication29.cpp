@@ -38,6 +38,18 @@ void positiveQuotes() {
     cout << quotes[distrib(rng)] << endl;
 }
 
+void negativeQuotes() {
+    vector<string> quotes = {
+        "You can do it, you're just not doing it now!",
+        "Just do it. It's not that hard",
+        "Try again... Please... I know you aren't thaat stupid!!!",
+        "Come oon, you are not that stupid"
+    };
+    auto rng = default_random_engine(time(0));
+    uniform_int_distribution<> distrib(0, quotes.size() - 1);
+    cout << quotes[distrib(rng)] << endl;
+}
+
 // function for the easy words of our program
 void runQuiz(vector <string> filenames, int difficulty)
 {
@@ -80,7 +92,7 @@ void runQuiz(vector <string> filenames, int difficulty)
         }
         else
         {
-            cout << "\n Dumbass!!!\n";
+            negativeQuotes();
         }
     }
     cout << "\n You guessed " << correctAnswers << " out of " << 4 << endl;
