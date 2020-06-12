@@ -7,12 +7,9 @@
 #include <random>
 #include <cctype>
 
-using namespace std;
+#include "structs.h"
 
-//question-answer pair
-struct QA_PAIR {
-    string word, definition;
-};
+using namespace std;
 
 void parseUserInput(int& out)
 {
