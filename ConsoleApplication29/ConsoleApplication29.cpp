@@ -42,9 +42,9 @@ bool isCorrect(vector <string> answerPool, QA_PAIR currentQuestion, int answer) 
     return false;
 }
 
-void readWordsFromFile(vector <string> &words, vector <QA_PAIR> &questionAnswerPairs) {
+void readWordsFromFile(vector <string> filenames, int difficulty, vector <string> &words, vector <QA_PAIR> &questionAnswerPairs) {
     ifstream file;
-    file.open("easy.txt");
+    file.open(filenames[difficulty - 1]);
     string temp;
     QA_PAIR temp2;
     while (file.good()) {
@@ -64,7 +64,7 @@ void readWordsFromFile(vector <string> &words, vector <QA_PAIR> &questionAnswerP
 }
 
 // function for the easy words of our program
-void easyOption()
+void runQuiz(vector <string> filenames, int difficulty)
 {
     vector <string> words;
     vector <QA_PAIR> questionAnswerPairs;
@@ -73,7 +73,7 @@ void easyOption()
     auto rng = default_random_engine(time(0));
     int j;
     int correctAnswers = 0;
-    readWordsFromFile(words, questionAnswerPairs);
+    readWordsFromFile(filenames, difficulty, words, questionAnswerPairs);
     shuffle(questionAnswerPairs.begin(), questionAnswerPairs.end(), rng);
     for (int i = 0; i < 4; i++) {
         shuffle(words.begin(), words.end(), rng);
@@ -110,21 +110,83 @@ void easyOption()
     cout << "\n You guessed " << correctAnswers << " out of " << 4 << endl;
 }
 
-void mediumOption(vector<string> vect, vector<string> definitions) {
+void addWord(vector <string> filenames, int difficulty, QA_PAIR toAdd)
+{
+    ofstream file;
 
+    file.open(filenames[difficulty - 1], ofstream::app);
+
+    file << toAdd.question << endl;
+    file << toAdd.answer << endl;
+
+    file.close();
 }
 
-void advancedOption() {
+void showAddMenu(vector <string> filenames)
+{
+    int difficulty;
+    QA_PAIR temp;
 
+    cout << "--- Add a word ---\n\n";
+    cout << "1. Add to easy words\n";
+    cout << "2. Add to advanced words\n";
+    cout << "Enter option from the menu by typing a number: ";
+    parseUserInput(difficulty);
+
+    if (difficulty < 1 or difficulty > 2) return;
+
+    cout << "Enter new word: ";
+    getline(cin, temp.question);
+
+    cout << "Enter definition for \"" << temp.question << "\":\n";
+    getline(cin, temp.answer);
+
+    addWord(filenames, difficulty, temp);
 }
 
-void editMode() {
+bool showEditMenu(vector <string> filenames)
+{
+    int userInput;
 
+    cout << "---- Editing Menu ----\n\n";
+    cout << "1. Add a word\n";
+    cout << "2. Delete a specific word\n";
+    cout << "3. Edit a specific word\n";
+    cout << "4. Browse words\n";
+    cout << "5. Return to Main Menu\n";
+    cout << "Enter option from the menu by typing a number: ";
+    parseUserInput(userInput);
+
+    switch (userInput) {
+        case 1:
+            showAddMenu(filenames);
+            break;
+        case 2:
+
+            break;
+        case 3:
+
+            break;
+        case 4:
+
+            break;
+        case 5:
+            return false;
+        default:
+            cout << "\nPlease enter a valid option!\n";
+            break;
+    }
+
+    return true;
+}
+
+void editMode(vector <string> filenames) {
+    while (showEditMenu(filenames));
 }
 // function for displaying greetings
 void showInitialGreeting()
 {
-    cout << "\n                                     Interoperable Console- Wordy                      \n";
+    cout << "\n                                         Wordy\n";
     cout << "  Welcome to our game called Wordy.\n";
     cout << "  Thank you for choosing our software!\n";
     cout << "  Please refer to the Documentation for a more detailed explanation about using the program.\n";
@@ -137,7 +199,7 @@ void showGoodbyeMessage()
     cout << "  Copyright (c) 2020 team\n";;
 }
 // function for our menu from which the player can chose difficulty, see his score or exit the program 
-bool doShowMenu()
+bool doShowMenu(vector <string> filenames)
 {
     vector<string> words;
     vector<string> definitions;
@@ -145,29 +207,26 @@ bool doShowMenu()
 
     cout << "\n------- Main Menu -------\n";
     cout << "\n1. Easy" << endl;
-    cout << "2. Medium" << endl;
-    cout << "3. Advanced" << endl;
-    cout << "4. Edit" << endl;
-    cout << "5. Quit" << endl;
+    cout << "2. Advanced" << endl;
+    cout << "3. Edit" << endl;
+    cout << "4. Quit" << endl;
     cout << "Enter option from the menu by typing a number: ";
     parseUserInput(userInput);
 
     switch (userInput)
     {
-    case 1:easyOption();
-
+    case 1:
+        runQuiz(filenames, 1);
         break;
-    //case 2:mediumOption();
+    case 2:
+        runQuiz(filenames, 2);
         break;
-    case 3:advancedOption();
+    case 3:
+        editMode(filenames);
         break;
-    case 4:editMode();
-        break;
-    case 5: {
+    case 4:
         showGoodbyeMessage();
-        return 0;
-        }
-        break;
+        return false;
    
     default: cout << "\nPlease enter a valid number!\n"; break;
     }
@@ -176,7 +235,11 @@ bool doShowMenu()
 
 int main()
 {
-    srand(time(NULL));
+    vector <string> filenames = {
+        "easy.txt",
+        "advanced.txt"
+    };
+
     showInitialGreeting();
-    while (doShowMenu()); // loop for the menu
+    while (doShowMenu(filenames)); // loop for the menu
 }
