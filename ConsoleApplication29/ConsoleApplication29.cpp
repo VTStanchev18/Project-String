@@ -26,6 +26,18 @@ bool isCorrect(vector <string> answerPool, QA_PAIR currentQuestion, int answer) 
     return false;
 }
 
+void positiveQuotes() {
+    vector<string> quotes = {
+        "You are doing great!!!",
+        "Woahh, Amaziing!!!",
+        "Greaat!!!",
+        "Perfect!!!"
+    };
+    auto rng = default_random_engine(time(0));
+    uniform_int_distribution<> distrib(0, quotes.size()-1);
+    cout << quotes[distrib(rng)] << endl;
+}
+
 // function for the easy words of our program
 void runQuiz(vector <string> filenames, int difficulty)
 {
@@ -56,13 +68,14 @@ void runQuiz(vector <string> filenames, int difficulty)
 
         cout << "\n Enter your answer: ";
         parseUserInput(userAnswer);
+        cout << " ";
         if (userAnswer<1 or userAnswer>j + 1) {
             i--;
             cout << "\nPlease enter a valid number!!!\n";
             continue;
         }
         if (isCorrect(answerPool, questionAnswerPairs[i],userAnswer)) {
-            cout << "\n Great!!!\n";
+            positiveQuotes();
             correctAnswers++;
         }
         else
