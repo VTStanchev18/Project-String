@@ -49,11 +49,14 @@ void readWordsFromFile(vector <string> &words, vector <QA_PAIR> &questionAnswerP
     QA_PAIR temp2;
     while (file.good()) {
         getline(file,temp);
+        if (!temp.size()) break;
 
         words.push_back(temp);
         temp2.question = temp;
         
         getline(file, temp);
+        if (!temp.size()) break;
+
         temp2.answer = temp;
         questionAnswerPairs.push_back(temp2);
     }
