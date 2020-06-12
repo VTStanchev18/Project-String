@@ -25,7 +25,7 @@ bool isCorrect(vector <string> answerPool, QA_PAIR currentQuestion, int answer) 
     }
     return false;
 }
-
+//positive messages for the user
 void positiveQuotes() {
     vector<string> quotes = {
         "You are doing great!!!",
@@ -37,7 +37,7 @@ void positiveQuotes() {
     uniform_int_distribution<> distrib(0, quotes.size()-1);
     cout << quotes[distrib(rng)] << endl;
 }
-
+//negative messages for the user
 void negativeQuotes() {
     vector<string> quotes = {
         "You can do it, you're just not doing it now!",
@@ -50,7 +50,7 @@ void negativeQuotes() {
     cout << quotes[distrib(rng)] << endl;
 }
 
-// function for the easy words of our program
+//displaying words and defenitions for the game
 void runQuiz(vector <string> filenames, int difficulty)
 {
     vector <string> words;
@@ -97,7 +97,7 @@ void runQuiz(vector <string> filenames, int difficulty)
     }
     cout << "\n You guessed " << correctAnswers << " out of " << 4 << endl;
 }
-
+//menu for adding a word and definition by selecting a level of difficulty
 void showAddMenu(vector <string> filenames)
 {
     int difficulty;
@@ -119,7 +119,7 @@ void showAddMenu(vector <string> filenames)
 
     addWord(filenames, difficulty, temp);
 }
-
+//menu for erasing a word or definition
 void showDeleteMenu(vector <string> filenames)
 {
     int difficulty;
@@ -138,7 +138,7 @@ void showDeleteMenu(vector <string> filenames)
 
     deleteWord(filenames, difficulty, word);
 }
-
+//displays from a chosen level of difficulty words
 void showBrowseMenu(vector <string> filenames)
 {
     ifstream oldFile;
@@ -182,7 +182,7 @@ void showBrowseMenu(vector <string> filenames)
     }
     updatedFile.close();
 }
-
+//menu for editing
 bool showEditMenu(vector <string> filenames)
 {
     int userInput;
@@ -218,7 +218,7 @@ bool showEditMenu(vector <string> filenames)
 void editMode(vector <string> filenames) {
     while (showEditMenu(filenames));
 }
-// function for displaying greetings
+//displaying greetings
 void showInitialGreeting()
 {
     cout << "\n                                         Bits Please\n";
@@ -227,13 +227,12 @@ void showInitialGreeting()
     cout << "  Please refer to the Documentation for a more detailed explanation about using the program.\n";
     cout << "  Our Team takes no responsibility for misuse of the program.\n\n";
 }
-// function for displaying goodbye message
+//displaying a goodbye message
 void showGoodbyeMessage()
 {
     cout << "\n  Thank you for using our game Guess The Word!\n\n";
     cout << "  Copyright (c) 2020 team\n";;
-}
-// function for our menu from which the player can chose difficulty, see his score or exit the program 
+} 
 bool doShowMenu(vector <string> filenames)
 {
     vector<string> words;
