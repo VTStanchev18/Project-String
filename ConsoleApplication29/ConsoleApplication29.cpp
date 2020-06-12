@@ -107,12 +107,12 @@ void runQuiz(vector <string> filenames, int difficulty)
             continue;
         }
         if (isCorrect(answerPool, questionAnswerPairs[i],userAnswer)) {
-            cout << "\n Great!!!\n\n";
+            cout << "\n Great!!!\n";
             correctAnswers++;
         }
         else
         {
-            cout << "\n Dumbass!!!\n\n";
+            cout << "\n Dumbass!!!\n";
         }
     }
     cout << "\n You guessed " << correctAnswers << " out of " << 4 << endl;
@@ -135,7 +135,7 @@ void showAddMenu(vector <string> filenames)
     int difficulty;
     QA_PAIR temp;
 
-    cout << "--- Add a word ---\n\n";
+    cout << "\n--- Add a word ---\n\n";
     cout << "1. Add to easy words\n";
     cout << "2. Add to advanced words\n";
     cout << "Enter option from the menu by typing a number: ";
@@ -184,7 +184,7 @@ void showDeleteMenu(vector <string> filenames)
     int difficulty;
     string word;
 
-    cout << "--- Delete a word ---\n\n";
+    cout << "\n--- Delete a word ---\n\n";
     cout << "1. Delete from easy words\n";
     cout << "2. Delete from advanced words\n";
     cout << "Enter option from the menu by typing a number: ";
@@ -207,7 +207,7 @@ void showBrowseMenu(vector <string> filenames)
     char choice;
     int difficulty;
 
-    cout << "--- Browse Words ---\n\n";
+    cout << "\n--- Browse Words ---\n\n";
     cout << "1. Browse easy words\n";
     cout << "2. Browse advanced words\n";
     cout << "Enter option from the menu by typing a number: ";
@@ -246,7 +246,7 @@ bool showEditMenu(vector <string> filenames)
 {
     int userInput;
 
-    cout << "---- Editing Menu ----\n\n";
+    cout << "\n---- Editing Menu ----\n\n";
     cout << "1. Add a word\n";
     cout << "2. Delete a specific word\n";
     cout << "3. Browse words\n";
