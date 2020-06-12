@@ -18,9 +18,15 @@
     <ClCompile Include="ConsoleApplication29.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="io functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="structs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="io functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

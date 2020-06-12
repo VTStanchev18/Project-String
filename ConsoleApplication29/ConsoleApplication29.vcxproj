@@ -148,8 +148,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication29.cpp" />
+    <ClCompile Include="io functions.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="io functions.h" />
     <ClInclude Include="structs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
