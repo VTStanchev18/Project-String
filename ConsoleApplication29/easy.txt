@@ -1,7 +1,7 @@
 signal
 Convey information or instructions by means of a gesture, action, or sound
 apple
-A round fruitypically has green or red color
+A round fruit typically has green or red color
 dog
 An animal that barks; humans' best friend
 cat

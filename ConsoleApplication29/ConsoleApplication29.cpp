@@ -196,8 +196,8 @@ void editMode(vector <string> filenames) {
 // function for displaying greetings
 void showInitialGreeting()
 {
-    cout << "\n                                         Wordy\n";
-    cout << "  Welcome to our game called Wordy.\n";
+    cout << "\n                                         Bits Please\n";
+    cout << "  Welcome to our game called Guess The Word.\n";
     cout << "  Thank you for choosing our software!\n";
     cout << "  Please refer to the Documentation for a more detailed explanation about using the program.\n";
     cout << "  Our Team takes no responsibility for misuse of the program.\n\n";
@@ -205,7 +205,7 @@ void showInitialGreeting()
 // function for displaying goodbye message
 void showGoodbyeMessage()
 {
-    cout << "\n  Thank you for using our game Wordy!\n\n";
+    cout << "\n  Thank you for using our game Guess The Word!\n\n";
     cout << "  Copyright (c) 2020 team\n";;
 }
 // function for our menu from which the player can chose difficulty, see his score or exit the program 
