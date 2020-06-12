@@ -248,7 +248,7 @@ void editMode(vector <string> filenames) {
 //displaying greetings
 void showInitialGreeting()
 {
-    cout << "\n                                         Bits Please\n";
+    cout << "\n                                       Bits Please Team\n";
     cout << "  Welcome to our game called Guess The Word.\n";
     cout << "  Thank you for choosing our software!\n";
     cout << "  Please refer to the Documentation for a more detailed explanation about using the program.\n";
@@ -258,8 +258,9 @@ void showInitialGreeting()
 void showGoodbyeMessage()
 {
     cout << "\n  Thank you for using our game Guess The Word!\n\n";
-    cout << "  Copyright (c) 2020 team\n";;
-} 
+    cout << "  Copyright (c) 2020 Bits Please team\n";
+}
+// function for our menu from which the player can chose difficulty, see his score or exit the program 
 bool doShowMenu(vector <string> filenames)
 {
     vector<string> words;
