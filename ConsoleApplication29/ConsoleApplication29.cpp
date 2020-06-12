@@ -138,7 +138,7 @@ void showDeleteMenu(vector <string> filenames)
 
     deleteWord(filenames, difficulty, word);
 }
-//displays from a chosen level of difficulty words
+//displays words from a chosen level of difficulty 
 void showBrowseMenu(vector <string> filenames)
 {
     ifstream oldFile;
@@ -182,6 +182,29 @@ void showBrowseMenu(vector <string> filenames)
     }
     updatedFile.close();
 }
+
+bool compareFunction(string word1, string word2){
+    return word1 < word2;
+}
+
+void seeAllWords(vector <string> filenames) {
+    vector <string> words;
+    vector <QA_PAIR> questionAnswerPairs;
+    int difficulty;
+    cout << "\n--- See Words ---\n\n";
+    cout << "1. See easy words\n";
+    cout << "2. See advanced words\n";
+    cout << "Enter option from the menu by typing a number: ";
+    parseUserInput(difficulty);
+
+    if (difficulty < 1 or difficulty > 2) return;
+    readWordsFromFile(filenames, difficulty, words, questionAnswerPairs);
+    sort(words.begin(), words.end(), compareFunction);
+    cout << endl;
+    for (int i = 0; i < words.size(); i++) {
+        cout << words[i] << endl;
+    }
+}
 //menu for editing
 bool showEditMenu(vector <string> filenames)
 {
@@ -191,7 +214,8 @@ bool showEditMenu(vector <string> filenames)
     cout << "1. Add a word\n";
     cout << "2. Delete a specific word\n";
     cout << "3. Browse words\n";
-    cout << "4. Return to Main Menu\n";
+    cout << "4. See all words\n";
+    cout << "5. Return to Main Menu\n";
     cout << "Enter option from the menu by typing a number: ";
     parseUserInput(userInput);
 
@@ -206,6 +230,9 @@ bool showEditMenu(vector <string> filenames)
             showBrowseMenu(filenames);
             break;
         case 4:
+            seeAllWords(filenames);
+            break;
+        case 5:
             return false;
         default:
             cout << "\nPlease enter a valid option!\n";
