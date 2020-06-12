@@ -11,7 +11,7 @@ using namespace std;
 
 //question-answer pair
 struct QA_PAIR {
-    string question, answer;
+    string word, definition;
 };
 
 void parseUserInput(int& out)
@@ -41,12 +41,13 @@ void parseUserInput(char &out)
 
 // function for checking whether user's answer is correct
 bool isCorrect(vector <string> answerPool, QA_PAIR currentQuestion, int answer) {
-    if (find(answerPool.begin(),answerPool.end(),currentQuestion.question) == answerPool.end()) {
-        if (answer == answerPool.size() + 1) {
+    if (answer == answerPool.size() + 1) {
+        if (find(answerPool.begin(), answerPool.end(), currentQuestion.word) == answerPool.end()) {
             return true;
         }
+        return false;
     }
-    if (answerPool[answer-1] == currentQuestion.question) {
+    if (answerPool[answer-1] == currentQuestion.word) {
         return true;
     }
     return false;
@@ -62,12 +63,12 @@ void readWordsFromFile(vector <string> filenames, int difficulty, vector <string
         if (!temp.size()) break;
 
         words.push_back(temp);
-        temp2.question = temp;
+        temp2.word = temp;
         
         getline(file, temp);
         if (!temp.size()) break;
 
-        temp2.answer = temp;
+        temp2.definition = temp;
         questionAnswerPairs.push_back(temp2);
     }
     file.close();
@@ -95,7 +96,7 @@ void runQuiz(vector <string> filenames, int difficulty)
         }
         shuffle(answerPool.begin(), answerPool.end(), rng);
 
-        cout << endl << questionAnswerPairs[i].answer << endl;
+        cout << endl << questionAnswerPairs[i].definition << endl;
         for (j = 0; j < 4; j++) {
             cout << j + 1 << ". " << answerPool[j] << endl;
         }
@@ -126,8 +127,8 @@ void addWord(vector <string> filenames, int difficulty, QA_PAIR toAdd)
 
     file.open(filenames[difficulty - 1], ofstream::app);
 
-    file << toAdd.question << endl;
-    file << toAdd.answer << endl;
+    file << toAdd.word << endl;
+    file << toAdd.definition << endl;
 
     file.close();
 }
@@ -146,10 +147,10 @@ void showAddMenu(vector <string> filenames)
     if (difficulty < 1 or difficulty > 2) return;
 
     cout << "Enter new word: ";
-    getline(cin, temp.question);
+    getline(cin, temp.word);
 
-    cout << "Enter definition for \"" << temp.question << "\":\n";
-    getline(cin, temp.answer);
+    cout << "Enter definition for \"" << temp.word << "\":\n";
+    getline(cin, temp.definition);
 
     addWord(filenames, difficulty, temp);
 }
