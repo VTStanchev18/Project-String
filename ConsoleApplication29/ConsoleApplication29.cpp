@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <random>
+#include <cctype>
 
 using namespace std;
 
@@ -27,6 +28,15 @@ void parseUserInput(int& out)
     }
 
     out = stoi(in);
+}
+
+void parseUserInput(char &out)
+{
+    string in;
+
+    getline(cin, in);
+
+    out = in[0];
 }
 
 // function for checking whether user's answer is correct
@@ -144,6 +154,96 @@ void showAddMenu(vector <string> filenames)
     addWord(filenames, difficulty, temp);
 }
 
+void deleteWord(vector <string> filenames, int difficulty, string toDelete)
+{
+    ifstream oldFile;
+    ofstream updatedFile;
+    vector <string> lines;
+    string temp;
+
+    oldFile.open(filenames[difficulty - 1]);
+    while (oldFile.good()) {
+        getline(oldFile, temp);
+        if (!temp.size()) break;
+
+        lines.push_back(temp);
+    }
+    oldFile.close();
+
+    updatedFile.open(filenames[difficulty - 1], ofstream::trunc);
+    for (size_t i = 0; i < lines.size(); i++) {
+        if (lines[i] == toDelete) {
+            i++;
+            continue;
+        }
+        updatedFile << lines[i] << endl;
+    }
+    updatedFile.close();
+}
+
+void showDeleteMenu(vector <string> filenames)
+{
+    int difficulty;
+    string word;
+
+    cout << "--- Delete a word ---\n\n";
+    cout << "1. Delete from easy words\n";
+    cout << "2. Delete from advanced words\n";
+    cout << "Enter option from the menu by typing a number: ";
+    parseUserInput(difficulty);
+
+    if (difficulty < 1 or difficulty > 2) return;
+
+    cout << "Enter word to delete: ";
+    getline(cin, word);
+
+    deleteWord(filenames, difficulty, word);
+}
+
+void showBrowseMenu(vector <string> filenames)
+{
+    ifstream oldFile;
+    ofstream updatedFile;
+    vector <string> lines;
+    string temp;
+    char choice;
+    int difficulty;
+
+    cout << "--- Browse Words ---\n\n";
+    cout << "1. Browse easy words\n";
+    cout << "2. Browse advanced words\n";
+    cout << "Enter option from the menu by typing a number: ";
+    parseUserInput(difficulty);
+
+    if (difficulty < 1 or difficulty > 2) return;
+
+    oldFile.open(filenames[difficulty - 1]);
+    while (oldFile.good()) {
+        getline(oldFile, temp);
+        if (!temp.size()) break;
+
+        lines.push_back(temp);
+    }
+    oldFile.close();
+
+    for (size_t i = 0; i < lines.size(); i+=2) {
+        cout << lines[i] << ":\n";
+        cout << lines[i+1] << endl;
+        cout << "Do you want to delete this word? (y/n) ";
+        parseUserInput(choice);
+        if (tolower(choice) == 'y') {
+            lines.erase(lines.begin() + i, lines.begin() + i + 2);
+            i -= 2;
+        }
+    }
+
+    updatedFile.open(filenames[difficulty - 1], ofstream::trunc);
+    for (size_t i = 0; i < lines.size(); i++) {
+        updatedFile << lines[i] << endl;
+    }
+    updatedFile.close();
+}
+
 bool showEditMenu(vector <string> filenames)
 {
     int userInput;
@@ -151,9 +251,8 @@ bool showEditMenu(vector <string> filenames)
     cout << "---- Editing Menu ----\n\n";
     cout << "1. Add a word\n";
     cout << "2. Delete a specific word\n";
-    cout << "3. Edit a specific word\n";
-    cout << "4. Browse words\n";
-    cout << "5. Return to Main Menu\n";
+    cout << "3. Browse words\n";
+    cout << "4. Return to Main Menu\n";
     cout << "Enter option from the menu by typing a number: ";
     parseUserInput(userInput);
 
@@ -162,15 +261,12 @@ bool showEditMenu(vector <string> filenames)
             showAddMenu(filenames);
             break;
         case 2:
-
+            showDeleteMenu(filenames);
             break;
         case 3:
-
+            showBrowseMenu(filenames);
             break;
         case 4:
-
-            break;
-        case 5:
             return false;
         default:
             cout << "\nPlease enter a valid option!\n";
