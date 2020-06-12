@@ -1,10 +1,10 @@
 signal
-convey information or instructions by means of a gesture, action, or sound
+Convey information or instructions by means of a gesture, action, or sound
 apple
-a round fruitypically has green or red color
+A round fruitypically has green or red color
 dog
-an animal that barks; humans' best friend
+An animal that barks; humans' best friend
 cat
-an animal that catches mice; hates dogs
+An animal that catches mice; hates dogs
 computer
-a device used for storing and processing data
+A device used for storing and processing data
